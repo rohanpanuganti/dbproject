@@ -1,0 +1,43 @@
+.fmt {
+  display: inline-block;
+  width: 139px;
+  margin-bottom: 10px;
+}
+
+.fmt2 {
+  display: inline-block;
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.fmt3 {
+  display: inline-block;
+  width: 139px;
+}
+
+span {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+
+#dob{
+  width: 173px;
+  height: 21px;
+}
+
+#pc{
+  margin-left: 15px;
+}
+
+#zip{
+  width: 115px;
+}
+
+#vet, #mil {
+  width: 169px;
+}
+
+fieldset {
+  width: 300px;
+}
