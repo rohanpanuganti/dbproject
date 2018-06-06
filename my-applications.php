@@ -5,9 +5,11 @@
     <title>My Application</title>
 </head>
 <body>
+	<?php echo "Welcome ".&usename; ?>
 <h1>My Application</h1>
 
 <?php
+
 $sql = "SELECT app_id, student_type_id, college_id, degree_id, major_id, term_id FROM application WHERE user_id = ".$user_id.";";
 $result = mysqli_query($conn,$sql);
 
