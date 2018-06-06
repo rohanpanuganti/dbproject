@@ -223,6 +223,7 @@ CREATE TABLE personal_info (
 	city VARCHAR(50) NOT NULL,
 	state_id INT NOT NULL,
 	postal_code CHAR(5) NOT NULL,
+	pref_phone CHAR(10) NOT NULL,
 	us_citizen ENUM('yes', 'no') NOT NULL,
 	english_native ENUM('yes', 'no') NOT NULL,
 	gender_id INT NOT NULL,/*table*/
