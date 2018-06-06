@@ -1,3 +1,28 @@
+<?php include './scripts/mysql_start.php'; ?>
+<?php 
+
+$stmt = mysqli_prepare($conn, "INSERT INTO personal_info (app_id, first_name, last_name, pref_name, birth_date, address, city, state_id, postal_code, pref_phone, us_citizen, english_native, veteran_id, military_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,)")
+mysqli_bind_param($stmt, 'ssssssssssssssss', $app_id, $first_name, $last_name, $pref_name, $birth_date, $address, $city, $state_id, $postal_code, $pref_name, $us_citizen, $english_native, $gender_id, $veteran_id, $military_id, $hisp_latino)
+$app_id = $_POST["app_id"];
+$first_name = $_POST['first_name'];
+$last_name = $_POST["last_name"];
+$pref_name = $_POST["pref_name"];
+$birth_date = $_POST["birth_date"];
+$address = $_POST["address"];
+$city = $_POST["city"];
+$state_id = $_POST["state_id"];
+$postal_code = $_POST["postal_code"];
+$pref_phone = $_POST["pref_phone"];
+$us_citizen = $_POST["us_citizen"];
+$english_native = $_POST["english_native"];
+$gender_id = $_POST["gender_id"];
+$veteran_id = $_POST["veteran_id"];
+$military_id = $_POST["military_id"];
+$hisp_latino = $_POST["hisp_latino"];
+
+msqli_stmt_execute($stmt);
+
+?>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -44,3 +69,4 @@
 </form>
 </body>
 </html>
+<?php include './scripts/mysql_close.php'; ?>
