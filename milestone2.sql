@@ -4,12 +4,14 @@
 	5/13/2018
 */
 SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS college;
 DROP TABLE IF EXISTS term;
 DROP TABLE IF EXISTS student_type;
 DROP TABLE IF EXISTS degree;
 DROP TABLE IF EXISTS major;
 DROP TABLE IF EXISTS application;
+DROP TABLE IF EXISTS gender;
 DROP TABLE IF EXISTS veteran;
 DROP TABLE IF EXISTS military;
 DROP TABLE IF EXISTS state;
@@ -18,11 +20,17 @@ DROP TABLE IF EXISTS app_info;
 DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS employment;
 DROP TABLE IF EXISTS test;
-DROP TABLE IF EXISTS entrance_test;
+DROP TABLE IF EXISTS app_test;
 DROP TABLE IF EXISTS ethnicity;
 DROP TABLE IF EXISTS app_ethnicity;
 SET FOREIGN_KEY_CHECKS = 1;
 
+CREATE TABLE user (
+	user_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	user_name VARCHAR(20) NOT NULL UNIQUE,
+	password CHAR(32) NOT NULL,
+	PRIMARY KEY(user_id)
+);
 
 CREATE TABLE college (
 	college_id INT NOT NULL AUTO_INCREMENT UNIQUE,
@@ -91,12 +99,14 @@ VALUES ('Certificate in Computer Science Fundamentals'),
 
 CREATE TABLE application (
 	app_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	user_id INT NOT NULL,
 	college_id INT NOT NULL,
 	term_id INT NOT NULL,
 	student_type_id INT NOT NULL,
 	degree_id INT NOT NULL,
 	major_id INT NOT NULL,
 	PRIMARY KEY(app_id),
+	FOREIGN KEY(user_id) REFERENCES user (user_id),
 	FOREIGN KEY(college_id) REFERENCES college (college_id),
 	FOREIGN KEY(term_id) REFERENCES term (term_id),
 	FOREIGN KEY(student_type_id) REFERENCES student_type (student_type_id),
@@ -104,6 +114,16 @@ CREATE TABLE application (
 	FOREIGN KEY(major_id) REFERENCES major (major_id)
 );
 
+CREATE TABLE gender (
+	gender_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	gender_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY(gender_id)
+);
+
+INSERT INTO gender(gender_name)
+VALUES ('Male'),
+('Female'),
+('Non-Binary');
 
 CREATE TABLE veteran (
 	veteran_id INT NOT NULL AUTO_INCREMENT UNIQUE,
@@ -117,6 +137,7 @@ VALUES ('Not a veteran'),
 ('Previously served'),
 ('Currently dependent');
 
+
 CREATE TABLE military (
 	military_id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	military_name VARCHAR(30) NOT NULL,
@@ -124,7 +145,8 @@ CREATE TABLE military (
 );
 
 INSERT INTO military (military_name)
-VALUES ('Army'),
+VALUES ('None'), 
+('Army'),
 ('Marine Corp'),
 ('Navy'),
 ('Air Force'),
@@ -203,13 +225,14 @@ CREATE TABLE personal_info (
 	postal_code CHAR(5) NOT NULL,
 	us_citizen ENUM('yes', 'no') NOT NULL,
 	english_native ENUM('yes', 'no') NOT NULL,
-	gender ENUM('male', 'female') NOT NULL,/*table*/
+	gender_id INT NOT NULL,/*table*/
 	veteran_id INT NOT NULL,
 	military_id INT NOT NULL,
 	hisp_latino ENUM('yes', 'no') NOT NULL,
 	PRIMARY KEY(personal_id),
 	FOREIGN KEY(app_id) REFERENCES application (app_id),
 	FOREIGN KEY(state_id) REFERENCES state (state_id),
+	FOREIGN KEY(gender_id) REFERENCES gender (gender_id),
 	FOREIGN KEY(veteran_id) REFERENCES veteran (veteran_id),
 	FOREIGN KEY(military_id) REFERENCES military (military_id)
 );
