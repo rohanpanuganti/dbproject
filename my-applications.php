@@ -10,7 +10,7 @@
 
 <?php
 
-$sql = "SELECT app_id, student_type_name, college_name, degree_name, major_name, term_name FROM application, student_type, college, degree, major, term WHERE application.student_type_id = student_type.student_type_id && application.college_id = college.college_id && application.degree_id = degree.degree_name && application.major_id = major.major_name && application.term_id = term.term_id && user_id = ".$user_id.";";
+$sql = "SELECT app_id, student_type_name, college_name, degree_name, major_name, term_name FROM application, student_type, college, degree, major, term WHERE application.student_type_id = student_type.student_type_id && application.college_id = college.college_id && application.degree_id = degree.degree_name && application.major_id = major.major_name && application.term_id = term.term_id && application.user_id = ".$user_id.";";
 
 $result = mysqli_query($conn,$sql);
 
